@@ -52,7 +52,7 @@ public Admin authenticateAdmin(String username, String password) {
     }
     return null;
 }
-
+    
     public boolean transferMoney(Customer sender, Customer receiver, double amount) {
         Transaction transaction = new Transaction(sender, receiver, amount);
         return transaction.execute();
