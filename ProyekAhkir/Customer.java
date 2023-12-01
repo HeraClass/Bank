@@ -1,4 +1,5 @@
 package ProyekAhkir;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,10 +8,10 @@ public class Customer extends User {
     private double accountBalance;
     private List<Transaction> transactions;
 
-    public Customer(String username, String password, String name, double accountBalance) {
+    public Customer(String username, String password, String name, double initialBalance) {
         super(username, password);
         this.name = name;
-        this.accountBalance = accountBalance;
+        this.accountBalance = initialBalance;
         this.transactions = new ArrayList<>();
     }
 
@@ -22,26 +23,35 @@ public class Customer extends User {
         return accountBalance;
     }
 
-    public void setAccountBalance(double accountBalance) {
-        this.accountBalance = accountBalance;
-    }
-
-    public void deposit(double amount) {
-        accountBalance += amount;
-    }
-
-    public void withdraw(double amount) {
-        if (amount > 0 && accountBalance >= amount) {
-            accountBalance -= amount;
-            System.out.println("Penarikan berhasil. Saldo saat ini: " + accountBalance);
-        } else {
-            System.out.println("Penarikan gagal. Harap periksa kembali jumlah penarikan atau saldo Anda.");
-        }
-    }
-
     public List<Transaction> getTransactions() {
         return transactions;
     }
 
-    
+    public void deposit(double amount) {
+        accountBalance += amount;
+        Transaction transaction = new Transaction("Deposit", getUsername(), getUsername(), amount, this, this);
+        transactions.add(transaction);
+    }
+
+    public void withdraw(double amount) {
+        if (accountBalance >= amount) {
+            accountBalance -= amount;
+            Transaction transaction = new Transaction("Withdrawal", getUsername(), getUsername(), amount, this, this);
+            transactions.add(transaction);
+        } else {
+            System.out.println("Insufficient funds. Withdrawal failed.");
+        }
+    }
+
+    public void printTransactionHistory() {
+        System.out.println("Transaction History for " + getUsername() + ":");
+        for (Transaction transaction : transactions) {
+            System.out.println("Type: " + transaction.getType());
+            System.out.println("Amount: " + transaction.getAmount());
+            System.out.println("Timestamp: " + transaction.getTimestamp());
+            System.out.println("Sender: " + transaction.getSenderUsername());
+            System.out.println("Receiver: " + transaction.getReceiverUsername());
+            System.out.println("-----");
+        }
+    }
 }
