@@ -42,11 +42,9 @@ public class Bank {
         return null;
     }
 
-   // Inside the Bank class
 public Admin authenticateAdmin(String username, String password) {
     for (User user : users) {
         if (user instanceof Admin && user.getUsername().equals(username)) {
-            // Assuming Admin class has a getPassword() method
             if (((Admin) user).getPassword().equals(password)) {
                 return (Admin) user;
             }
