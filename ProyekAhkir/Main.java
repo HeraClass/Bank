@@ -10,8 +10,7 @@ public class Main {
 
         Admin admin = new Admin("admin", "adminpass", "Admin Name");
         bank.addUser(admin);
-
-
+        
         Customer customer1 = new Customer("user1", "pass1", "Denny Mahendra", 50000);
         Customer customer2 = new Customer("user2", "pass2", "Jane Mervina", 50000);
         bank.addCustomer(customer1);
@@ -124,10 +123,11 @@ public class Main {
             System.out.println("2. Tarik Uang");
             System.out.println("3. Transfer");
             System.out.println("4. Lihat Saldo");
-            System.out.println("5. Logout");
-
+            System.out.println("5. Lihat Riwayat Transaksi");
+            System.out.println("6. Logout");
+    
             int choice = scanner.nextInt();
-
+    
             switch (choice) {
                 case 1:
                     depositMoney(customer, scanner);
@@ -139,9 +139,12 @@ public class Main {
                     transferMoney(customer, bank, scanner);
                     break;
                 case 4:
-                    checkBalance(customer); 
-                    break;    
+                    checkBalance(customer);
+                    break;
                 case 5:
+                    customer.printTransactionHistory();
+                    break;
+                case 6:
                     System.out.println("Logout berhasil.");
                     return;
                 default:
