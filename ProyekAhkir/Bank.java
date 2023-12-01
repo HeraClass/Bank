@@ -1,4 +1,5 @@
 package ProyekAhkir;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,19 +43,22 @@ public class Bank {
         return null;
     }
 
-public Admin authenticateAdmin(String username, String password) {
-    for (User user : users) {
-        if (user instanceof Admin && user.getUsername().equals(username)) {
-            if (((Admin) user).getPassword().equals(password)) {
-                return (Admin) user;
+    public Admin authenticateAdmin(String username, String password) {
+        for (User user : users) {
+            if (user instanceof Admin && user.getUsername().equals(username)) {
+                if (((Admin) user).getPassword().equals(password)) {
+                    return (Admin) user;
+                }
             }
         }
+        return null;
     }
-    return null;
-}
-    
+
     public boolean transferMoney(Customer sender, Customer receiver, double amount) {
-        Transaction transaction = new Transaction(sender, receiver, amount);
+        // Membuat transaksi dengan jenis "transfer"
+        Transaction transaction = new Transaction("transfer", sender.getUsername(), receiver.getUsername(), amount, sender, receiver);
+
+        // Mengeksekusi transaksi
         return transaction.execute();
     }
 }
