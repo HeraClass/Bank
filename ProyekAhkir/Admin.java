@@ -4,7 +4,6 @@ import java.util.List;
 public class Admin extends User {
     public Admin(String username, String password, String name) {
         super(username, password, name);
-        // tambahkan logika konstruktor Admin jika diperlukan
     }
     
     @Override
@@ -16,5 +15,4 @@ public class Admin extends User {
         return bank.getCustomers();
     }
 
-    // method dan atribut lainnya sesuai kebutuhan
 }
