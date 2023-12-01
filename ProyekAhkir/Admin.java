@@ -14,5 +14,4 @@ public class Admin extends User {
     public List<Customer> viewAllCustomers(Bank bank) {
         return bank.getCustomers();
     }
-
 }
